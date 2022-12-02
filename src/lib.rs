@@ -29,11 +29,12 @@ pub mod dropbox {
         pub fn delete(self, path: &str) -> Result<(), Box<dyn std::error::Error>> {
             let mut client = reqwest::blocking::Client::new();
             let result = client
-                .post("https://content.dropboxapi.com/2/files/delete_v2")
+                .post("https://api.dropboxapi.com/2/files/delete_v2")
                 .header(header::AUTHORIZATION, format!("Bearer {}", self.access_token))
                 .header(header::CONTENT_TYPE, "application/json")
-                .header("Dropbox-API-Arg", format!("{{\"path\":\"{}\"}}", path))
+                .body(format!("{{\"path\":\"{}\"}}", path))
                 .send()?;
+            println!("{}", result.text()?);
             Ok(())
         }
 
