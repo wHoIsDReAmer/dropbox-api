@@ -1,2 +1,2 @@
-# dropbox_api
+# dropbox-api
 dropbox api using rust
